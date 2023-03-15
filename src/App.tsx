@@ -123,7 +123,6 @@ function App() {
 
     const checkGameResult = () => {
         if (userScore === 3 || computerScore === 3) {
-            // optionButtons?.classList.add("disabled");
             setIsGameOver(true);
 
             if (userScore === computerScore) {
@@ -146,7 +145,6 @@ function App() {
         setUserWins(false);
         setComputerWins(false);
         setIsGameOver(false);
-        // optionButtons?.classList.remove("disabled");
     };
 
     return (

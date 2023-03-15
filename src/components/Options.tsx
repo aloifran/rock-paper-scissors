@@ -13,14 +13,18 @@ interface OptionsProps {
     disabled: boolean;
 }
 
-export default function Options(props: OptionsProps) {
+export default function Options({
+    disabled,
+    options,
+    handleChoice,
+}: OptionsProps) {
     const optionButtons = document.getElementById("options");
 
     useEffect(() => {
-        props.disabled
+        disabled
             ? optionButtons?.classList.add("disabled")
             : optionButtons?.classList.remove("disabled");
-    }, [props.disabled]);
+    }, [disabled]);
 
     return (
         <Container
@@ -30,7 +34,7 @@ export default function Options(props: OptionsProps) {
             alignItems="center"
             id="options"
         >
-            {props.options.map((option) => (
+            {options.map((option) => (
                 <motion.div
                     whileHover={{
                         scale: 1.1,
@@ -47,7 +51,7 @@ export default function Options(props: OptionsProps) {
                         alt={option.name}
                         size={96}
                         onClick={() => {
-                            props.handleChoice(option.name);
+                            handleChoice(option.name);
                         }}
                     />
                 </motion.div>

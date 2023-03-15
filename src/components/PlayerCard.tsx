@@ -8,7 +8,12 @@ interface PlayerCardProps {
     isWinner: boolean;
 }
 
-export default function PlayerCard(props: PlayerCardProps) {
+export default function PlayerCard({
+    playerName,
+    playerChoice,
+    playerScore,
+    isWinner,
+}: PlayerCardProps) {
     const variants: Variants = {
         winner: {
             backgroundColor: ["rgb(255, 255, 255)", "rgba(132, 255, 183, 0.6)"],
@@ -27,18 +32,18 @@ export default function PlayerCard(props: PlayerCardProps) {
         <>
             <Card>
                 <motion.div
-                    animate={props.isWinner ? "winner" : "notWinner"}
+                    animate={isWinner ? "winner" : "notWinner"}
                     variants={variants}
                 >
                     <Card.Header>
                         <Card.Header.Title justifyContent="center">
-                            {props.playerName}
+                            {playerName}
                         </Card.Header.Title>
                     </Card.Header>
                 </motion.div>
                 <Card.Content>
                     <Media display="flex" justifyContent="center">
-                        {props.playerChoice != "" && (
+                        {playerChoice != "" && (
                             <motion.img
                                 initial={{ opacity: 0, scale: 0 }}
                                 animate={{ opacity: 1, scale: 1 }}
@@ -47,15 +52,15 @@ export default function PlayerCard(props: PlayerCardProps) {
                                     type: "spring",
                                     bounce: 0.3,
                                 }}
-                                src={props.playerChoice + ".png"}
-                                alt={props.playerChoice}
+                                src={playerChoice + ".png"}
+                                alt={playerChoice}
                             />
                         )}
                     </Media>
                 </Card.Content>
             </Card>
             <Box shadowless>
-                <Heading size={4}>{props.playerScore}</Heading>
+                <Heading size={4}>{playerScore}</Heading>
             </Box>
         </>
     );
