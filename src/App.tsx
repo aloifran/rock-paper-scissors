@@ -1,27 +1,33 @@
 import { useState, useEffect } from "react";
 import {
     Columns,
-    Container,
     Section,
-    Media,
     Hero,
-    Card,
     Heading,
     Button,
-    Image,
 } from "react-bulma-components";
-import { motion } from "framer-motion";
 import "./App.sass";
+import PlayerCard from "./components/PlayerCard";
+import Options from "./components/Options";
 
 function App() {
-    const [playerChoice, setPlayerChoice] = useState("");
+    const [userChoice, setUserChoice] = useState("");
     const [computerChoice, setComputerChoice] = useState("");
-    const [playerScore, setPlayerScore] = useState(0);
+    const [userScore, setUserScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
-    const [gameResult, setGameResult] = useState("");
-    const [roundResult, setRoundResult] = useState("");
+    const [userWon, setUserWins] = useState(false);
+    const [computerWon, setComputerWins] = useState(false);
+    const [roundResultMsg, setRoundResultMsg] = useState("");
+    const [gameResultMsg, setGameResultMsg] = useState("");
+    const [isGameOver, setIsGameOver] = useState(false);
 
-    const optionButtons = document.getElementById("options");
+    useEffect(() => {
+        checkRoundResult();
+    }, [computerChoice]);
+
+    useEffect(() => {
+        checkGameResult();
+    }, [userScore, computerScore]);
 
     const options = [
         {
@@ -45,166 +51,140 @@ function App() {
         "DRAW",
     ];
 
-    useEffect(() => {
-        checkRoundResult();
-    }, [computerChoice]);
-
-    useEffect(() => {
-        checkGameResult();
-    }, [playerScore, computerScore]);
-
     const generateComputerChoice = () => {
         const i = Math.floor(Math.random() * options.length);
         const randomChoice = options[i].name;
-        setComputerChoice("");
-        // set after 1s
-        setTimeout(() => {
-            setComputerChoice(randomChoice);
-        }, 1000);
+        setComputerChoice(randomChoice);
     };
 
-    const handleRound = (choice: string) => {
-        setPlayerChoice(choice);
-        generateComputerChoice();
+    const handleChoice = (choice: string) => {
+        setUserChoice("");
+        setComputerChoice("");
+
+        setTimeout(() => {
+            setUserChoice(choice);
+            generateComputerChoice();
+        }, 400);
+    };
+
+    const setRoundWinner = (player: string) => {
+        if (player === "user") {
+            setUserWins(true);
+            setComputerWins(false);
+        } else if (player === "computer") {
+            setUserWins(false);
+            setComputerWins(true);
+        } else {
+            setUserWins(false);
+            setComputerWins(false);
+        }
     };
 
     const checkRoundResult = () => {
         // rock beats scissors
-        if (playerChoice === "rock" && computerChoice === "scissors") {
-            setPlayerScore(playerScore + 1);
-            setRoundResult(resultMessages[0]);
-        } else if (computerChoice === "rock" && playerChoice === "scissors") {
+        if (userChoice === "rock" && computerChoice === "scissors") {
+            setUserScore(userScore + 1);
+            setRoundResultMsg(resultMessages[0]);
+            setRoundWinner("user");
+        } else if (computerChoice === "rock" && userChoice === "scissors") {
             setComputerScore(computerScore + 1);
-            setRoundResult(resultMessages[0]);
+            setRoundResultMsg(resultMessages[0]);
+            setRoundWinner("computer");
         }
 
         // scissors beat paper
-        if (playerChoice === "scissors" && computerChoice === "paper") {
-            setPlayerScore(playerScore + 1);
-            setRoundResult(resultMessages[1]);
-        } else if (computerChoice === "scissors" && playerChoice === "paper") {
+        if (userChoice === "scissors" && computerChoice === "paper") {
+            setUserScore(userScore + 1);
+            setRoundResultMsg(resultMessages[1]);
+            setRoundWinner("user");
+        } else if (computerChoice === "scissors" && userChoice === "paper") {
             setComputerScore(computerScore + 1);
-            setRoundResult(resultMessages[1]);
+            setRoundResultMsg(resultMessages[1]);
+            setRoundWinner("computer");
         }
 
         // paper beats rock
-        if (playerChoice === "paper" && computerChoice === "rock") {
-            setPlayerScore(playerScore + 1);
-            setRoundResult(resultMessages[2]);
-        } else if (computerChoice === "paper" && playerChoice === "rock") {
+        if (userChoice === "paper" && computerChoice === "rock") {
+            setUserScore(userScore + 1);
+            setRoundResultMsg(resultMessages[2]);
+            setRoundWinner("user");
+        } else if (computerChoice === "paper" && userChoice === "rock") {
             setComputerScore(computerScore + 1);
-            setRoundResult(resultMessages[2]);
+            setRoundResultMsg(resultMessages[2]);
+            setRoundWinner("computer");
         }
 
-        if (playerChoice != "" && playerChoice === computerChoice) {
-            setRoundResult(resultMessages[3]);
+        // draw
+        if (userChoice != "" && userChoice === computerChoice) {
+            setRoundResultMsg(resultMessages[3]);
+            setRoundWinner("draw");
         }
     };
 
     const checkGameResult = () => {
-        if (playerScore === 3 || computerScore === 3) {
-            optionButtons?.classList.add("disabled");
+        if (userScore === 3 || computerScore === 3) {
+            setIsGameOver(true);
 
-            if (playerScore === computerScore) {
-                setGameResult("IT'S A DRAW!");
-            } else if (playerScore > computerScore) {
-                setGameResult("YOU WIN!");
+            if (userScore === computerScore) {
+                setGameResultMsg("IT'S A DRAW!");
+            } else if (userScore > computerScore) {
+                setGameResultMsg("YOU WON!");
             } else {
-                setGameResult("COMPUTER WINS!");
+                setGameResultMsg("COMPUTER WON!");
             }
         }
     };
 
     const resetGame = () => {
-        setPlayerChoice("");
+        setUserChoice("");
         setComputerChoice("");
-        setPlayerScore(0);
+        setUserScore(0);
         setComputerScore(0);
-        setGameResult("");
-        setRoundResult("");
-        optionButtons?.classList.remove("disabled");
+        setGameResultMsg("");
+        setRoundResultMsg("");
+        setUserWins(false);
+        setComputerWins(false);
+        setIsGameOver(false);
     };
 
     return (
         <>
             <Hero>
-                <Heading>ROCK PAPER SCISSORS</Heading>
-                {/* <Button onClick={() => document.body.classList.toggle("dark")}>
-                    Light/Dark
-                </Button> */}
+                <Heading size={2}>ROCK PAPER SCISSORS</Heading>
                 <Hero.Body>
-                    <Heading size={4}>{roundResult}</Heading>
-                    <Heading size={3}>{gameResult}</Heading>
+                    <Heading size={4}>{roundResultMsg}</Heading>
+                    <Heading size={3}>{gameResultMsg}</Heading>
                 </Hero.Body>
             </Hero>
 
             <Columns>
                 <Columns.Column>
-                    <Card>
-                        <Card.Header>
-                            <Card.Header.Title justifyContent="center">
-                                COMPUTER
-                            </Card.Header.Title>
-                        </Card.Header>
-                        <Card.Content>
-                            <Media display="flex" justifyContent="center">
-                                <Image
-                                    src={computerChoice + ".png"}
-                                    alt={computerChoice}
-                                    size={128}
-                                />
-                            </Media>
-                        </Card.Content>
-                        <Heading size={4}>{computerScore}</Heading>
-                    </Card>
+                    <PlayerCard
+                        playerName="COMPUTER"
+                        playerChoice={computerChoice}
+                        playerScore={computerScore}
+                        isWinner={computerWon}
+                    />
                 </Columns.Column>
 
                 <Columns.Column>
-                    <Card>
-                        <Card.Header>
-                            <Card.Header.Title justifyContent="center">
-                                YOU
-                            </Card.Header.Title>
-                        </Card.Header>
-                        <Card.Content>
-                            <Media display="flex" justifyContent="center">
-                                <motion.div>
-                                    <Image
-                                        src={playerChoice + ".png"}
-                                        alt={playerChoice}
-                                        size={128}
-                                    />
-                                </motion.div>
-                            </Media>
-                        </Card.Content>
-                        <Heading size={4}>{playerScore}</Heading>
-                    </Card>
+                    <PlayerCard
+                        playerName="YOU"
+                        playerChoice={userChoice}
+                        playerScore={userScore}
+                        isWinner={userWon}
+                    />
                 </Columns.Column>
 
                 <Columns.Column>
-                    <Container
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        id="options"
-                    >
-                        {options.map((option) => (
-                            <motion.div whileTap={{ scale: 0.85 }}>
-                                <Image
-                                    key={option.name}
-                                    src={option.img}
-                                    alt={option.name}
-                                    size={96}
-                                    onClick={() => {
-                                        handleRound(option.name);
-                                    }}
-                                />
-                            </motion.div>
-                        ))}
-                    </Container>
+                    <Options
+                        options={options}
+                        handleChoice={handleChoice}
+                        disabled={isGameOver}
+                    />
                 </Columns.Column>
             </Columns>
+
             <Section>
                 <Button size="large" onClick={resetGame}>
                     NEW GAME
