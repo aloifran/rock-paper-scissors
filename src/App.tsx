@@ -9,6 +9,8 @@ import {
 import "./App.sass";
 import PlayerCard from "./components/PlayerCard";
 import Options from "./components/Options";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 function App() {
     const [userChoice, setUserChoice] = useState("");
@@ -149,8 +151,8 @@ function App() {
 
     return (
         <>
+            <NavBar />
             <Hero>
-                <Heading size={2}>ROCK PAPER SCISSORS</Heading>
                 <Hero.Body>
                     <Heading size={4}>{roundResultMsg}</Heading>
                     <Heading size={3}>{gameResultMsg}</Heading>
@@ -166,7 +168,6 @@ function App() {
                         isWinner={computerWon}
                     />
                 </Columns.Column>
-
                 <Columns.Column>
                     <PlayerCard
                         playerName="YOU"
@@ -175,7 +176,6 @@ function App() {
                         isWinner={userWon}
                     />
                 </Columns.Column>
-
                 <Columns.Column>
                     <Options
                         options={options}
@@ -190,6 +190,7 @@ function App() {
                     NEW GAME
                 </Button>
             </Section>
+            <Footer />
         </>
     );
 }
