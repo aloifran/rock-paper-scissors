@@ -4,7 +4,7 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif
     max-width: 1280px
     margin: 0 auto
-    padding: 2rem
+    padding: 1rem
     text-align: center
 
 body 
@@ -12,6 +12,7 @@ body
     display: flex
     min-width: 320px
     min-height: 100vh
+    line-height: 1
     background-color: $light
 
 .card
@@ -24,5 +25,22 @@ body
 .disabled
     pointer-events: none
 
+.burger
+    margin: 20px 20px 0 0
+
+.navbar
+    display: flex
+    background-color: $light
+
+.footer
+    background-color: $light
+    border-top: 1px solid lightgray
+
 #options
     cursor: pointer
+
+#icon
+    color: unset
+
+#footer
+    padding: 2rem 1.5rem
