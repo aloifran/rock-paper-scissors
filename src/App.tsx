@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-    Columns,
-    Section,
-    Hero,
-    Heading,
-    Button,
-} from "react-bulma-components";
+import { Columns, Hero, Heading } from "react-bulma-components";
 import "./App.sass";
 import PlayerCard from "./components/PlayerCard";
 import Options from "./components/Options";
@@ -154,13 +148,13 @@ function App() {
             <NavBar />
             <Hero>
                 <Hero.Body>
-                    <Heading size={4}>{roundResultMsg}</Heading>
-                    <Heading size={3}>{gameResultMsg}</Heading>
+                    <Heading size={5}>{roundResultMsg}</Heading>
+                    <Heading size={4}>{gameResultMsg}</Heading>
                 </Hero.Body>
             </Hero>
 
-            <Columns>
-                <Columns.Column>
+            <Columns breakpoint="mobile">
+                <Columns.Column narrow>
                     <PlayerCard
                         playerName="COMPUTER"
                         playerChoice={computerChoice}
@@ -168,7 +162,7 @@ function App() {
                         isWinner={computerWon}
                     />
                 </Columns.Column>
-                <Columns.Column>
+                <Columns.Column narrow>
                     <PlayerCard
                         playerName="YOU"
                         playerChoice={userChoice}
@@ -176,20 +170,14 @@ function App() {
                         isWinner={userWon}
                     />
                 </Columns.Column>
-                <Columns.Column>
-                    <Options
-                        options={options}
-                        handleChoice={handleChoice}
-                        disabled={isGameOver}
-                    />
-                </Columns.Column>
             </Columns>
 
-            <Section>
-                <Button size="large" onClick={resetGame}>
-                    NEW GAME
-                </Button>
-            </Section>
+            <Options
+                options={options}
+                handleChoice={handleChoice}
+                resetGame={resetGame}
+                disabled={isGameOver}
+            />
             <Footer />
         </>
     );
