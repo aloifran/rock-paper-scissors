@@ -1,4 +1,4 @@
-import { Box, Media, Card, Heading } from "react-bulma-components";
+import { Container, Box, Media, Card, Heading } from "react-bulma-components";
 import { motion, Variants } from "framer-motion";
 
 interface PlayerCardProps {
@@ -29,7 +29,7 @@ export default function PlayerCard({
     };
 
     return (
-        <>
+        <Container>
             <Card>
                 <motion.div
                     animate={isWinner ? "winner" : "notWinner"}
@@ -62,6 +62,6 @@ export default function PlayerCard({
             <Box shadowless>
                 <Heading size={4}>{playerScore}</Heading>
             </Box>
-        </>
+        </Container>
     );
 }

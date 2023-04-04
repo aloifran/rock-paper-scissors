@@ -1,15 +1,17 @@
 @import "bulma/bulma.sass" 
 
 #root
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif
+    display: grid
     max-width: 1280px
+    min-width: 420px
     margin: 0 auto
     padding: 1rem
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif
     text-align: center
 
 body 
-    margin: 0
     display: flex
+    margin: 0
     min-width: 320px
     min-height: 100vh
     line-height: 1
@@ -20,27 +22,30 @@ body
     width: 180px    
 
 .hero-body
-    height: 180px    
+    height: 160px    
+    padding: 2rem
 
 .disabled
     pointer-events: none
 
 .burger
     margin: 20px 20px 0 0
+    cursor: pointer
 
 .navbar
     display: flex
+    align-items: center
     background-color: $light
 
-.footer
+#footer
     background-color: $light
     border-top: 1px solid lightgray
+    margin-top: 2rem
+    padding: 1.5rem 0
 
 #options
     cursor: pointer
+    margin-bottom: 2rem
 
 #icon
     color: unset
-
-#footer
-    padding: 2rem 1.5rem

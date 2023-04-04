@@ -6,8 +6,8 @@ interface Props extends SVGMotionProps<any> {
 
 export default function MenuButton({
     isOpen = false,
-    width = 16,
-    height = 16,
+    width = 12,
+    height = 12,
     ...props
 }: Props) {
     const variant = isOpen ? "opened" : "closed";
