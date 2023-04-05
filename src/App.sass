@@ -3,7 +3,7 @@
 #root
     display: grid
     max-width: 1280px
-    min-width: 420px
+    min-width: 380px
     margin: 0 auto
     padding: 1rem
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif
@@ -17,25 +17,28 @@ body
     line-height: 1
     background-color: $light
 
-.card
-    height: 236px
-    width: 180px    
-
-.hero-body
-    height: 160px    
-    padding: 2rem
-
-.disabled
-    pointer-events: none
+.navbar
+    display: flex
+    align-items: center
+    background-color: $light
 
 .burger
     margin: 20px 20px 0 0
     cursor: pointer
 
-.navbar
-    display: flex
-    align-items: center
-    background-color: $light
+.hero
+    height: 3rem
+    padding: 1rem
+
+.card
+    height: 210px
+    width: 160px 
+
+.columns   
+    margin-bottom: -1rem !important
+
+.disabled
+    pointer-events: none
 
 #footer
     background-color: $light

@@ -14,7 +14,7 @@ export default function NavBar() {
                 />
             </Navbar.Brand>
             <Navbar.Item renderAs="div">
-                <Heading>ROCK PAPER SCISSORS</Heading>
+                <Heading size={4}>ROCK PAPER SCISSORS</Heading>
             </Navbar.Item>
         </Navbar>
     );

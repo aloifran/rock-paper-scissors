@@ -147,13 +147,10 @@ function App() {
         <>
             <NavBar />
             <Hero>
-                <Hero.Body>
-                    <Heading size={5}>{roundResultMsg}</Heading>
-                    <Heading size={4}>{gameResultMsg}</Heading>
-                </Hero.Body>
+                <Heading size={5}>{gameResultMsg || roundResultMsg}</Heading>
             </Hero>
 
-            <Columns breakpoint="mobile">
+            <Columns breakpoint="mobile" centered>
                 <Columns.Column narrow>
                     <PlayerCard
                         playerName="COMPUTER"
