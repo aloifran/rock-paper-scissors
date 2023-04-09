@@ -1,3 +1,4 @@
+import options from "../../assets/options.json";
 import { Container, Box, Media, Card, Heading } from "react-bulma-components";
 import { motion, Variants } from "framer-motion";
 
@@ -52,15 +53,22 @@ export default function PlayerCard({
                                     type: "spring",
                                     bounce: 0.3,
                                 }}
-                                src={playerChoice + ".png"}
+                                src={
+                                    options.filter(
+                                        (option) => option.name === playerChoice
+                                    )[0].img
+                                }
                                 alt={playerChoice}
+                                data-test={`choice-${playerName}`}
                             />
                         )}
                     </Media>
                 </Card.Content>
             </Card>
             <Box shadowless>
-                <Heading size={4}>{playerScore}</Heading>
+                <Heading size={4} data-test={`score-${playerName}`}>
+                    {playerScore}
+                </Heading>
             </Box>
         </Container>
     );

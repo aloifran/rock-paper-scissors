@@ -1,14 +1,9 @@
+import options from "../../assets/options.json";
 import { Container, Image, Button } from "react-bulma-components";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 
-type Option = {
-    name: string;
-    img: string;
-};
-
 interface OptionsProps {
-    options: Option[];
     handleChoice: Function;
     disabled: boolean;
     resetGame: Function;
@@ -16,7 +11,6 @@ interface OptionsProps {
 
 export default function Options({
     disabled,
-    options,
     handleChoice,
     resetGame,
 }: OptionsProps) {
@@ -47,6 +41,7 @@ export default function Options({
                             transition: { duration: 0.3 },
                         }}
                         key={option.name}
+                        data-test={`option-${option.name}`}
                     >
                         <Image
                             src={option.img}
@@ -58,7 +53,11 @@ export default function Options({
                 ))}
             </Container>
             <Container>
-                <Button size="large" onClick={() => resetGame()}>
+                <Button
+                    data-test="btn-reset"
+                    size="large"
+                    onClick={() => resetGame()}
+                >
                     NEW GAME
                 </Button>
             </Container>

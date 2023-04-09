@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navbar, Heading } from "react-bulma-components";
-import BurgerMenu from "./BurgerMenu";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
 export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);

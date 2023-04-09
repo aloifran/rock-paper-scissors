@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Columns, Hero, Heading } from "react-bulma-components";
 import "./App.sass";
-import PlayerCard from "./components/PlayerCard";
-import Options from "./components/Options";
+import options from "./assets/options.json";
+import PlayerCard from "./components/PlayerCard/PlayerCard";
+import Options from "./components/Options/Options";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
@@ -24,21 +25,6 @@ function App() {
     useEffect(() => {
         checkGameResult();
     }, [userScore, computerScore]);
-
-    const options = [
-        {
-            name: "rock",
-            img: "rock.png",
-        },
-        {
-            name: "paper",
-            img: "paper.png",
-        },
-        {
-            name: "scissors",
-            img: "scissors.png",
-        },
-    ];
 
     const resultMessages = [
         "ROCK BEATS SCISSORS",
@@ -170,7 +156,6 @@ function App() {
             </Columns>
 
             <Options
-                options={options}
                 handleChoice={handleChoice}
                 resetGame={resetGame}
                 disabled={isGameOver}

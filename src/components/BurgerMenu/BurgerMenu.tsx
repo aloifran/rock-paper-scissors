@@ -1,15 +1,15 @@
 import { motion, SVGMotionProps } from "framer-motion";
 
-interface Props extends SVGMotionProps<any> {
+interface BurgerMenuProps extends SVGMotionProps<any> {
     isOpen?: boolean;
 }
 
-export default function MenuButton({
+export default function BurgerMenu({
     isOpen = false,
     width = 12,
     height = 12,
     ...props
-}: Props) {
+}: BurgerMenuProps) {
     const variant = isOpen ? "opened" : "closed";
     const top = {
         closed: {
@@ -53,6 +53,7 @@ export default function MenuButton({
     return (
         <div className="burger">
             <motion.svg
+                // data-test="burger"
                 viewBox={`0 0 ${unitWidth} ${unitHeight}`}
                 overflow="visible"
                 preserveAspectRatio="none"

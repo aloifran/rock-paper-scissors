@@ -1,0 +1,14 @@
+[
+    {
+        "name": "rock",
+        "img": "https://i.imgur.com/sGJ9Dv5.png"
+    },
+    {
+        "name": "paper",
+        "img": "https://i.imgur.com/IGbAsqS.png"
+    },
+    {
+        "name": "scissors",
+        "img": "https://i.imgur.com/bHfTvQ2.png"
+    }
+]
