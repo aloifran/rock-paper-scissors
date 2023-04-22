@@ -8,8 +8,8 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 function App() {
-    const [userChoice, setUserChoice] = useState("");
-    const [computerChoice, setComputerChoice] = useState("");
+    const [userChoice, setUserChoice] = useState<choice>(null);
+    const [computerChoice, setComputerChoice] = useState<choice>(null);
     const [userScore, setUserScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
     const [userWon, setUserWins] = useState(false);
@@ -35,13 +35,13 @@ function App() {
 
     const generateComputerChoice = () => {
         const i = Math.floor(Math.random() * options.length);
-        const randomChoice = options[i].name;
+        const randomChoice = options[i].name as choice;
         setComputerChoice(randomChoice);
     };
 
-    const handleChoice = (choice: string) => {
-        setUserChoice("");
-        setComputerChoice("");
+    const handleChoice = (choice: choice) => {
+        setUserChoice(null);
+        setComputerChoice(null);
 
         setTimeout(() => {
             setUserChoice(choice);
@@ -97,7 +97,7 @@ function App() {
         }
 
         // draw
-        if (userChoice != "" && userChoice === computerChoice) {
+        if (userChoice && userChoice === computerChoice) {
             setRoundResultMsg(resultMessages[3]);
             setRoundWinner("draw");
         }
@@ -118,8 +118,8 @@ function App() {
     };
 
     const resetGame = () => {
-        setUserChoice("");
-        setComputerChoice("");
+        setUserChoice(null);
+        setComputerChoice(null);
         setUserScore(0);
         setComputerScore(0);
         setGameResultMsg("");

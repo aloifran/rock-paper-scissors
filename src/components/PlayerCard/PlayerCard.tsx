@@ -4,7 +4,7 @@ import { motion, Variants } from "framer-motion";
 
 interface PlayerCardProps {
     playerName: string;
-    playerChoice: string;
+    playerChoice: choice;
     playerScore: number;
     isWinner: boolean;
 }
@@ -44,7 +44,7 @@ export default function PlayerCard({
                 </motion.div>
                 <Card.Content>
                     <Media display="flex" justifyContent="center">
-                        {playerChoice != "" && (
+                        {playerChoice && (
                             <motion.img
                                 initial={{ opacity: 0, scale: 0 }}
                                 animate={{ opacity: 1, scale: 1 }}
