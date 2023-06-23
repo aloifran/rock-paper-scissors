@@ -1,14 +1,14 @@
 [
     {
         "name": "rock",
-        "img": "https://i.imgur.com/sGJ9Dv5.png"
+        "img": "rock.png"
     },
     {
         "name": "paper",
-        "img": "https://i.imgur.com/IGbAsqS.png"
+        "img": "paper.png"
     },
     {
         "name": "scissors",
-        "img": "https://i.imgur.com/bHfTvQ2.png"
+        "img": "scissors.png"
     }
 ]
